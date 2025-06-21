@@ -1,21 +1,21 @@
-import { TextField, Button, Box } from "@mui/material";
+import { TextField, Button, Box } from "@mui/material"; //Untuk input layout
 import React, { useEffect, useState } from "react";
 
 export default function CustomerForm({ onSubmit, initialData = {}, onCancel }) {
-  const [form, setForm] = useState({ name: "", phone: "", email: "" });
+  const [form, setForm] = useState({ name: "", phone: "", email: "" }); //menyimpan nilai input dari form || Diset kosong, lalu bisa diubah jika ada data dari initialData
 
   useEffect(() => {
-    if (initialData) setForm(initialData);
+    if (initialData) setForm(initialData); //Jika initialData berubah, maka nilai form akan diisi dengan data tersebut
   }, [initialData]);
 
   const handleChange = (element) => {
-    setForm({ ...form, [element.target.name]: element.target.value });
+    setForm({ ...form, [element.target.name]: element.target.value }); //Akan mengupdate state form berdasarkan nama field
   };
 
   const handleSubmit = (element) => {
-    element.preventDefault();
-    onSubmit(form);
-    setForm({ name: "", phone: "", email: "" });
+    element.preventDefault(); //Mencegah reload halaman saat form disubmit
+    onSubmit(form); //Memanggil fungsi onSubmit dari parent <LayoutCustomer />
+    setForm({ name: "", phone: "", email: "" }); //Setelah disubmit, reset form dikosongkan kembali
   };
 
   return (

@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import {
@@ -14,12 +13,13 @@ import TransactionTable from "../pages/TransactionTable";
 import Navbar from "../components/Navbar";
 
 export default function LayoutTransaction() {
-  const [transactions, setTransactions] = useState([]);
-  const [customers, setCustomers] = useState([]);
-  const [packages, setPackages] = useState([]);
-  const [editing, setEditing] = useState(null);
+  const [transactions, setTransactions] = useState([]); //Menyimpan data transactions dari db.json
+  const [customers, setCustomers] = useState([]); //Menyimpan data customers dari db.json
+  const [packages, setPackages] = useState([]); //Menyimpan data packages dari db.json
+  const [editing, setEditing] = useState(null); //Menyimpan data transaction yang sedang diedit [jika null berarti sedang menambahkan data baru]
 
   const loadData = async () => {
+    //Untuk mengambil semua data sekaligus menggunakan Promise.all() agar lebih cepat
     const [trxRes, custRes, pkgRes] = await Promise.all([
       getTransactions(),
       getCustomers(),
@@ -31,22 +31,25 @@ export default function LayoutTransaction() {
   };
 
   useEffect(() => {
+    //Agar data langsung tersedia ketika halaman dibuka
     loadData();
   }, []);
 
   const handleSubmit = async (data) => {
     if (editing) {
+      //Update transaction berdasarkan id || editing !== null
       await updateTransaction(editing.id, data);
       setEditing(null);
     } else {
+      //Tambah transaction
       await addTransaction(data);
     }
-    loadData();
+    loadData(); //Data dimuat ulang
   };
 
   const handleDelete = async (id) => {
-    await deleteTransaction(id);
-    loadData();
+    await deleteTransaction(id); //Menghapus data transaction berdasrkan id
+    loadData(); //Muat data ulang
   };
 
   return (

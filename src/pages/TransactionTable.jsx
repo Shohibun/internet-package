@@ -15,8 +15,9 @@ export default function TransactionTable({
   onEdit,
   onDelete,
 }) {
-  const getCustomerName = (id) =>
-    customers.find((c) => c.id === id)?.name || "-";
+  const getCustomerName = (
+    id //Mengambil nama customer berdasarkan id (customerId dari transaction)
+  ) => customers.find((c) => c.id === id)?.name || "-"; //Jika tidak menemukan maka akan menemapilkan "-"
 
   return (
     <Table>
@@ -29,21 +30,26 @@ export default function TransactionTable({
         </TableRow>
       </TableHead>
       <TableBody>
-        {transactions.map((trx) => (
-          <TableRow key={trx.id}>
-            <TableCell>{getCustomerName(trx.customerId)}</TableCell>
-            <TableCell>{trx.package}</TableCell>
-            <TableCell>Rp{trx.price}</TableCell>
-            <TableCell>
-              <IconButton onClick={() => onEdit(trx)}>
-                <Edit />
-              </IconButton>
-              <IconButton onClick={() => onDelete(trx.id)}>
-                <Delete />
-              </IconButton>
-            </TableCell>
-          </TableRow>
-        ))}
+        {transactions.map(
+          (
+            trx //Looping data transactions dan menampilkan ke dalam table
+          ) => (
+            <TableRow key={trx.id}>
+              {/* Menampilkan nama customer berdasarkan id */}
+              <TableCell>{getCustomerName(trx.customerId)}</TableCell>
+              <TableCell>{trx.package}</TableCell>
+              <TableCell>Rp{trx.price}</TableCell>
+              <TableCell>
+                <IconButton onClick={() => onEdit(trx)}>
+                  <Edit />
+                </IconButton>
+                <IconButton onClick={() => onDelete(trx.id)}>
+                  <Delete />
+                </IconButton>
+              </TableCell>
+            </TableRow>
+          )
+        )}
       </TableBody>
     </Table>
   );

@@ -14,31 +14,33 @@ export default function TransactionForm({
   customers,
   packages,
   onSubmit,
-  initialData = {},
+  initialData = {}, //Data diawal jika sedang diedit
   onCancel,
 }) {
   const [form, setForm] = useState({
     customerId: "",
     package: "",
     price: 0,
-  });
+  }); //Menyimpan nilai input dari form || Diset kosong, lalu bisa diubah jika ada data dari initialData
 
   useEffect(() => {
-    if (initialData) setForm(initialData);
+    if (initialData) setForm(initialData); //Mengedit state form ketika initialData berubah
   }, [initialData]);
 
   useEffect(() => {
+    //Menyesuaikan harga secara otomatis berdasarkan data packages, setiap nama paket berubah
     const selected = packages.find((p) => p.name === form.package);
     setForm((f) => ({ ...f, price: selected?.price || 0 }));
   }, [form.package, packages]);
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (
+    e //Mengubah nilai form saat user memilih input
+  ) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(form);
-    setForm({ customerId: "", package: "", price: 0 });
+    e.preventDefault(); //Mencegah reload
+    onSubmit(form); //Memanggil fungsi onSubmit dari parent
+    setForm({ customerId: "", package: "", price: 0 }); //Mengosongkan form
   };
 
   return (

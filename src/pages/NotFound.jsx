@@ -1,6 +1,5 @@
-import React from "react";
-
 export default function NotFound() {
+  //Untuk halaman not found
   return (
     <div className="w-screen h-screen flex justify-center items-center custom-bg-error">
       <div className="text-center text-white">

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,19 +11,20 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
+import { Link, useNavigate } from "react-router-dom"; //Digunakan untuk redirect halaman
 import User from "../assets/user.jpg";
-import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.svg";
 
+//Daftar halaman navigasi yamh akan ditampilkan
 const pages = ["Home", "Customer", "Transaction"];
 const settings = ["Logout"];
 
 export default function Navbar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = React.useState(null); //Elemen pembuka menu navigasi [Mobile]
+  const [anchorElUser, setAnchorElUser] = React.useState(null); //Elmen pembuka menu user
   const navigate = useNavigate();
 
+  //Membuka atau menutup navigasi
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -39,6 +40,7 @@ export default function Navbar() {
     setAnchorElUser(null);
   };
 
+  //Menghapus statut login dari localStorage dan redirect ke halaman login
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     navigate("/");
@@ -48,6 +50,7 @@ export default function Navbar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          {/* Menu Desktop */}
           <Typography
             sx={{
               mr: 2,
@@ -63,6 +66,7 @@ export default function Navbar() {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            {/* Humburger Menu Navbar */}
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -73,6 +77,7 @@ export default function Navbar() {
             >
               <MenuIcon />
             </IconButton>
+            {/* =========== */}
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -101,6 +106,9 @@ export default function Navbar() {
               ))}
             </Menu>
           </Box>
+          {/* =========== */}
+
+          {/* Menu Mobile */}
           <Typography
             sx={{
               mr: 2,
@@ -116,6 +124,7 @@ export default function Navbar() {
             <img src={Logo} alt="Logo" className="w-12 h-12" />
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {/* Looping navigasi halaman */}
             {pages.map((page) => (
               <Button
                 key={page}
@@ -128,6 +137,9 @@ export default function Navbar() {
               </Button>
             ))}
           </Box>
+          {/* =========== */}
+
+          {/* Avatar User */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -159,6 +171,7 @@ export default function Navbar() {
               ))}
             </Menu>
           </Box>
+          {/* =========== */}
         </Toolbar>
       </Container>
     </AppBar>

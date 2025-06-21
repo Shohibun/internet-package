@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getCustomers,
   addCustomer,
@@ -11,31 +11,33 @@ import { Box, Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
 
 export default function LayoutCustomer() {
-  const [customers, setCustomers] = useState([]);
-  const [editing, setEditing] = useState(null);
+  const [customers, setCustomers] = useState([]); //Menyimpan data customers dari db.json
+  const [editing, setEditing] = useState(null); //Menyimpan data customer yang sedang diedit [jika null berarti sedang menambahkan data baru]
 
   const loadData = async () => {
-    const res = await getCustomers();
-    setCustomers(res.data);
+    const res = await getCustomers(); //Melakukan request ke db.json/customers
+    setCustomers(res.data); //Menyimpang hasil request ke state customers
   };
 
   useEffect(() => {
-    loadData();
-  }, []);
+    loadData(); //Memuat data data dari db.json/customers, ketika pertama kali dirender
+  }, []); //Memastikan array [] dijalankan sekali
 
   const handleSubmit = async (data) => {
     if (editing) {
+      //Diproses ketika sedang mengedit
       await updateCustomer(editing.id, data);
       setEditing(null);
     } else {
+      //Diproses ketika menambahkan data baru
       await addCustomer(data);
     }
-    loadData();
+    loadData(); //Setelah selesai, data dimuat ulang dari db.json/customers agar terupdate
   };
 
   const handleDelete = async (id) => {
-    await deleteCustomer(id);
-    loadData();
+    await deleteCustomer(id); //Menghapus data customer berdasrkan id
+    loadData(); //Memuat ulang data agar terupdate
   };
 
   return (

@@ -5,19 +5,21 @@ import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import Logo from "../assets/logo.svg";
 
 export default function Login() {
+  //Mendapatkan input dari user secara real time
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  //Untuk redirect link
   const navigate = useNavigate();
 
   const handleLogin = (element) => {
-    element.preventDefault();
+    element.preventDefault(); //Mencegah reload saat disubmit
 
-    // Dummy login check
+    //Validasri username dan password
     if (username === "admin" && password === "admin123") {
-      localStorage.setItem("isLoggedIn", "true");
-      navigate("/home");
+      localStorage.setItem("isLoggedIn", "true"); //Menyimpan status login ke localStorage
+      navigate("/home"); //Mengarahkan ke halaman home jika benar
     } else {
-      alert("Login gagal.");
+      alert("Login gagal."); //Jika gagal akan muncul error seperti ini
     }
   };
 

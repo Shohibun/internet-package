@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import LayoutHome from "./layouts/Home";
 import LayoutCustomer from "./layouts/Customer";
 import LayoutTransaction from "./layouts/Transaction";
-import Protected from "./components/Protected";
+import Protected from "./components/Protected"; //Berfungsi untuk proteksi halaman [Diharuskan login dulu]
 import NotFound from "./pages/NotFound";
 
 function App() {

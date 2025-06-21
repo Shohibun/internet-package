@@ -5,21 +5,20 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Customer from "../assets/customer.jpg";
 import Transaction from "../assets/transaction.jpg";
-import { CardActionArea } from "@mui/material";
 import axios from "axios";
 
 export default function Home() {
-  const [totalCustomers, setTotalCustomers] = useState(0);
-  const [totalTransactions, setTotalTransactions] = useState(0);
+  const [totalCustomers, setTotalCustomers] = useState(0); //Menyimpan data total customer
+  const [totalTransactions, setTotalTransactions] = useState(0); //Menyimpan data total transaction
 
   useEffect(() => {
     axios
       .get("http://localhost:3001/customers")
       .then((res) => {
-        setTotalCustomers(res.data.length);
+        setTotalCustomers(res.data.length); //Mendapatkan data total customer
       })
       .catch((err) => {
-        console.error("Failed get data:", err);
+        console.error("Failed get data:", err); //Menampilkan pesan error jika gagal
       });
   }, []);
 
@@ -27,10 +26,10 @@ export default function Home() {
     axios
       .get("http://localhost:3001/transactions")
       .then((res) => {
-        setTotalTransactions(res.data.length);
+        setTotalTransactions(res.data.length); //Mendapatkan data total transaction
       })
       .catch((err) => {
-        console.error("Failed get data:", err);
+        console.error("Failed get data:", err); //Menampilkan pesan error jika gagal
       });
   }, []);
 
