@@ -4,15 +4,39 @@ import Login from "./pages/Login";
 import LayoutHome from "./layouts/Home";
 import LayoutCustomer from "./layouts/Customer";
 import LayoutTransaction from "./layouts/Transaction";
+import Protected from "./components/Protected";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/home" element={<LayoutHome />} />
-        <Route path="/customer" element={<LayoutCustomer />} />
-        <Route path="/transaction" element={<LayoutTransaction />} />
+        <Route
+          path="/home"
+          element={
+            <Protected>
+              <LayoutHome />
+            </Protected>
+          }
+        />
+        <Route
+          path="/customer"
+          element={
+            <Protected>
+              <LayoutCustomer />
+            </Protected>
+          }
+        />
+        <Route
+          path="/transaction"
+          element={
+            <Protected>
+              <LayoutTransaction />
+            </Protected>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

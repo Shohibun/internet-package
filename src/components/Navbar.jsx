@@ -13,14 +13,15 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import User from "../assets/user.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const pages = ["Dashboard", "Customer", "Transaction"];
+const pages = ["Home", "Customer", "Transaction"];
 const settings = ["Logout"];
 
 export default function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -37,6 +38,11 @@ export default function Navbar() {
     setAnchorElUser(null);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    navigate("/");
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -46,7 +52,7 @@ export default function Navbar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="#"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -154,12 +160,7 @@ export default function Navbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem
-                  key={setting}
-                  component={Link}
-                  to="/"
-                  onClick={handleCloseUserMenu}
-                >
+                <MenuItem key={setting} onClick={handleLogout}>
                   <Typography sx={{ textAlign: "center" }}>
                     {setting}
                   </Typography>

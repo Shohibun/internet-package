@@ -2,17 +2,19 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import Logo from "../assets/logo.svg";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const handleLogin = (element) => {
+    element.preventDefault();
 
     // Dummy login check
     if (username === "admin" && password === "admin123") {
+      localStorage.setItem("isLoggedIn", "true");
       navigate("/home");
     } else {
       alert("Login gagal.");
@@ -22,9 +24,17 @@ export default function Login() {
   return (
     <div className="w-screen h-screen bg-blue-600 flex items-center justify-center">
       <div className="w-4/12 bg-white p-8 rounded-lg shadow-lg">
-        <Typography variant="h5" className="mb-2 font-bold">
-          Login
-        </Typography>
+        <div className="text-center">
+          <img
+            src={Logo}
+            alt="Logo"
+            className="w-20 h-20 border-2 mx-auto rounded-lg"
+          />
+
+          <h1 className="font-bold text-xl">Package Internet</h1>
+        </div>
+
+        <Typography variant="h6">Login</Typography>
         <Box component="form" onSubmit={handleLogin}>
           <TextField
             fullWidth
