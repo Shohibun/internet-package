@@ -38,8 +38,8 @@ export default function Home() {
     <div className="w-full flex justify-center items-center mt-20">
       <div className="w-8/12 flex justify-center items-center">
         <div className="">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="col-span-1">
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="col-span-1 mb-2 md:mb-0">
               <Card sx={{ maxWidth: 345 }}>
                 <CardMedia
                   sx={{ height: 140 }}
@@ -65,7 +65,7 @@ export default function Home() {
               </Card>
             </div>
 
-            <div className="col-span-1">
+            <div className="col-span-1 mb-5 md:mb-0">
               <Card sx={{ maxWidth: 345 }}>
                 <CardMedia
                   sx={{ height: 140 }}

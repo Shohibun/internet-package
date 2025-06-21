@@ -23,7 +23,7 @@ export default function Login() {
 
   return (
     <div className="w-screen h-screen bg-blue-600 flex items-center justify-center">
-      <div className="w-4/12 bg-white p-8 rounded-lg shadow-lg">
+      <div className="w-8/12 md:w-4/12 bg-white p-8 rounded-lg shadow-lg">
         <div className="text-center">
           <img
             src={Logo}

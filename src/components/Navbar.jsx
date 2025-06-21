@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import User from "../assets/user.jpg";
 import { Link, useNavigate } from "react-router-dom";
+import Logo from "../assets/logo.svg";
 
 const pages = ["Home", "Customer", "Transaction"];
 const settings = ["Logout"];
@@ -47,12 +48,7 @@ export default function Navbar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -63,7 +59,7 @@ export default function Navbar() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            <img src={Logo} alt="Logo" className="w-12 h-12" />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -105,12 +101,7 @@ export default function Navbar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -122,7 +113,7 @@ export default function Navbar() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            <img src={Logo} alt="Logo" className="w-12 h-12" />
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
